@@ -1,0 +1,87 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+
+#### unigrab-ui ########
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+unigrab-ui/dist
+unigrab-ui/tmp
+unigrab-ui/out-tsc
+unigrab-ui/bazel-out
+
+# Node
+unigrab-ui/node_modules
+unigrab-ui/npm-debug.log
+unigrab-ui/yarn-error.log
+
+# IDEs and editors
+unigrab-ui/.idea/
+unigrab-ui/.project
+unigrab-ui/.angular
+unigrab-ui/.classpath
+unigrab-ui/.c9/
+unigrab-ui/*.launch
+unigrab-ui/.settings/
+unigrab-ui/*.sublime-workspace
+
+# Visual Studio Code
+unigrab-ui/.vscode
+unigrab-ui/.vscode/*
+unigrab-ui/!.vscode/settings.json
+unigrab-ui/!.vscode/tasks.json
+unigrab-ui/!.vscode/launch.json
+unigrab-ui/!.vscode/extensions.json
+unigrab-ui/.history/*
+
+# Miscellaneous
+unigrab-ui/.angular/cache
+unigrab-ui/.sass-cache/
+unigrab-ui/connect.lock
+unigrab-ui/coverage
+unigrab-ui/libpeerconnection.log
+unigrab-ui/testem.log
+unigrab-ui/typings
+
+# System files
+unigrab-ui/.DS_Store
+unigrab-ui/Thumbs.db
+
+unigrab-ui/package-lock.json

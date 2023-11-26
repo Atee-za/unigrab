@@ -1,0 +1,65 @@
+.navbar{
+  height: 120px;
+  border-bottom: thick;
+  z-index: 999; /* this makes the dialog component in profile appears above the navbar, do not remove */
+}
+
+ul{
+  list-style-type: none;
+  display: inline-block;
+}
+
+li{
+  display: inline;
+  margin-right: 20px;
+  margin-left: 5px;
+}
+
+div a{
+  color: #868484;
+  text-decoration: none;
+}
+
+.container div {
+  display: inline;
+  margin-right: 20px;
+  margin-left: 5px;
+}
+
+span{
+  display: inline-block
+}
+
+span li{
+  margin: auto;
+}
+
+.expanded {
+  transition: padding-bottom 0.9s ease-in-out;
+  padding-top: 2em;
+  padding-bottom: 4rem;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .nav-item {
+    display: inline;
+  }
+}
+
+.search {
+  flex-direction: column;
+}
+
+.nav-item {
+  cursor: pointer;
+  transition: border-bottom 0.5s ease-in-out;
+}
+
+.active-link {
+  border-bottom: 2px solid #ad1414;
+}
+
+.nav-item:hover:not(.active-link) {
+  border-bottom: 1px solid #333333;
+}

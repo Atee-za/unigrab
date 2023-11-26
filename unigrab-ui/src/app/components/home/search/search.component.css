@@ -1,0 +1,84 @@
+
+.search-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.clear-button {
+  color: #ff4081;
+}
+
+.search-button {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+@media screen and (max-width: 690px) {
+  .checkbox-row  {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .input-fields {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .buttons {
+    align-items: center;
+    margin-top: 2px;
+  }
+
+}
+
+@media screen and (max-width: 450px) {
+  .checkbox-row  {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .input-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+
+  .buttons {
+    align-items: center;
+    margin-top: 2px;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .checkbox-row  {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+
+  .input-fields {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2px;
+  }
+
+  .buttons {
+    align-items: center;
+    margin-top: 2px;
+  }
+
+}
+
+

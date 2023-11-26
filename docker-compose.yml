@@ -1,0 +1,15 @@
+services:
+  unigrab:
+    container_name: unigrabcontainer
+    build:
+      context: .
+      args:
+        CONTAINER_PORT: ${CONTAINER_PORT}
+    image: unigrab:latest
+    restart: unless-stopped
+    environment:
+      - ${ENV_FILE}
+    expose:
+      - ${CONTAINER_PORT}
+    ports:
+      - ${CONTAINER_PORT}:${HOST_PORT}

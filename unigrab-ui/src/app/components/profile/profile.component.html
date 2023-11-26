@@ -1,0 +1,383 @@
+<div *ngIf="loadingPage; then loadingTemplate else mainTemplate"></div>
+
+<!--TEMPLATES-->
+
+
+<!--mainTemplate -->
+<ng-template #mainTemplate>
+  <div class="container p-0">
+    <h3 class="mt-1 mb-3">Settings</h3>
+    <div class="row">
+      <div class="col-2 col-sm-4 col-md-4 col-xl-3">
+        <ng-container *ngTemplateOutlet="sideNavTemplate"></ng-container>
+      </div>
+
+      <div class="col-9 col-sm-8 col-md-8 col-xl-8">
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!--loadingTemplate-->
+<ng-template #loadingTemplate>
+  <div [class.spinner]="loadingPage"></div>
+</ng-template>
+
+<!--sideNavTemplate-->
+<ng-template #sideNavTemplate>
+  <div class="card">
+
+    <div class="list-group list-group-flush">
+      <a class="list-group-item list-group-item-action"
+         (click)="showSection('items')"
+         [class.active]="currentSection === 'items'">
+                <span>
+                  <img src="../assets/icons/collection.svg">
+                </span>
+        Items
+      </a>
+
+      <a class="list-group-item list-group-item-action"
+         (click)="showSection('profile')"
+         [class.active]="currentSection === 'profile'">
+                <span>
+                  <img src="../assets/icons/person.svg">
+                </span>
+        Profile
+      </a>
+
+      <a class="list-group-item list-group-item-action"
+         (click)="showSection('password')"
+         [class.active]="currentSection === 'password'">
+                <span>
+                  <img src="../assets/icons/password.svg">
+                </span>
+        Password
+      </a>
+
+      <a class="list-group-item list-group-item-action"
+         (click)="showSection('account')"
+         [class.active]="currentSection === 'account'">
+                <span>
+                  <img src="../assets/icons/settings.svg">
+                </span>
+        Account
+      </a>
+
+      <a class="list-group-item list-group-item-action"
+         (click)="showSection('authorization')"
+         [class.active]="currentSection === 'authorization'">
+                <span>
+                  <img src="../assets/icons/authorization.svg">
+                </span>
+        Authorization
+      </a>
+
+      <a class="list-group-item list-group-item-action"
+         (click)="showSection('authentication')"
+         [class.active]="currentSection === 'authentication'">
+                <span>
+                  <img src="../assets/icons/authentication.svg">
+                </span>
+        Authentication
+      </a>
+    </div>
+  </div>
+</ng-template>
+
+<!--contentTemplate-->
+<ng-template #contentTemplate>
+  <!--Items-->
+  <ng-container *ngIf="currentSection === 'items'; then newItemTemplate"></ng-container>
+  <ng-container *ngIf="currentSection === 'items'; then itemsTemplate"></ng-container>
+
+  <!--Profile Info-->
+  <ng-container *ngIf="currentSection === 'profile'; then profileTemplate"></ng-container>
+
+  <!--Password-->
+  <ng-container *ngIf="currentSection === 'password'; then passwordTemplate"></ng-container>
+</ng-template>
+
+<!--newItemTemplate-->
+<ng-template #newItemTemplate>
+  <div class="card">
+    <div class="card-header">
+      <p class="card-title mb-0">ADD NEW ITEM</p>
+    </div>
+    <div class="card-body">
+      <form  [formGroup]="newItemForm" novalidate>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type" placeholder="**not selected**">
+                <mat-option *ngFor="let type of itemTypes" value="{{ type.toLowerCase() }}">{{ type }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Samsung" formControlName="itemName">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Price</mat-label>
+              <input type="number" min="10" max="20001" matInput formControlName="price">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <div>
+              <input accept="image/jpg, image/jpeg, image/png"
+                     (change)="onFileUpload($event)"
+                     id="fileInput" multiple type="file"
+                     formControlName="images">
+              <label class="custom-file-upload" for="fileInput">UPLOAD IMAGE</label>
+            </div>
+
+            <div class="image-preview mt-3">
+              <div *ngFor="let image of imageUrls; let i = index" id="imagePreview">
+                <img (click)="removeImageFromPreview(i)" [src]="image">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div>
+          <button
+            [disabled]="!isValidNewItem() || loadingUploadItem"
+            [class.spinner]="loadingUploadItem"
+            (click)="saveItem()" mat-raised-button>
+            ADD
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</ng-template>
+
+<!--profileTemplate-->
+<ng-template #profileTemplate>
+  <div class="card">
+    <div class="card-header">
+      <p class="card-title mb-0">USER INFO</p>
+    </div>
+    <div class="card-body">
+      <form  [formGroup]="userInfoForm" novalidate>
+        <div class="container-fluid">
+          <div >
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput readonly formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Contact Number</mat-label>
+              <input matInput formControlName="contact">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Are you a student?</mat-label>
+              <mat-select formControlName="student">
+                <mat-option value="true">Yes</mat-option>
+                <mat-option value="false">No</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div *ngIf="isStudent(); then campusAddressTemplate else townAddressTemplate"></div>
+
+            <button
+              (click)="updateAddress(isStudent())"
+              [disabled]="canUpdateAddress()"
+              [class.spinner]="loadingUserInfo"
+              mat-raised-button>
+              UPDATE
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<!--itemsTemplate-->
+<ng-template #itemsTemplate>
+  <div class="card">
+    <div class="card-header">
+      <p class="card-title mb-0">MY ITEMS</p>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="container-fluid">
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)" #input>
+          </mat-form-field>
+
+          <div class="mat-elevation-z8 table-responsive">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Price (R)</th>
+                <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let row">
+
+                  <button
+                    mat-icon-button color="primary"
+                    (click)="openDialog(row, 'view')">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+
+                  <button
+                    mat-icon-button color="accent"
+                    (click)="openDialog(row, 'edit')">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+
+                  <button
+                    (click)="deleteItem(row.id, row.type)"
+                    mat-icon-button color="warn"
+                    data-toggle="modal"
+                    data-target="#deleteModal">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No items matching the filter "{{input.value}}"</td>
+              </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 15, 30]" aria-label="Select page"></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!--passwordTemplate-->
+<ng-template #passwordTemplate>
+  <div class="card">
+    <div class="card-header">
+      <p class="card-title mb-0">UPDATE PASSWORD</p>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="userPasswordForm" novalidate>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Current Password</mat-label>
+            <input matInput [type]="hideCPassword ? 'password' : 'text'" formControlName="currentPassword" required>
+            <button
+              mat-icon-button matSuffix
+              (click)="hideCPassword = !hideCPassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hideCPassword"
+              type="button">
+              <mat-icon>{{hideCPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>New Password</mat-label>
+          <input matInput [type]="hideNPassword ? 'password' : 'text'" formControlName="newPassword" required>
+          <button
+            mat-icon-button matSuffix
+            (click)="hideNPassword = !hideNPassword"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hideNPassword"
+            type="button">
+            <mat-icon>{{hideNPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm New Password</mat-label>
+          <input matInput [type]="hideNPassword ? 'password' : 'text'" formControlName="confirmPassword" required>
+          <button
+            mat-icon-button matSuffix
+            (click)="hideNPassword = !hideNPassword"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hideNPassword"
+            type="button">
+            <mat-icon>{{hideNPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <div>
+          <button
+            (click)="updatePassword()"
+            [disabled]="!isValidPasswords()"
+            [class.spinner]="loadingPassword"
+            mat-raised-button>
+            UPDATE
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<!--campusAddressTemplate-->
+<ng-template #campusAddressTemplate>
+  <form [formGroup]="addressCampusForm" novalidate>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Campus Name</mat-label>
+        <input matInput formControlName="campusName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>School Name</mat-label>
+        <input matInput formControlName="schoolName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Suburb</mat-label>
+        <input matInput formControlName="suburb">
+      </mat-form-field>
+  </form>
+</ng-template>
+
+<!--townAddressTemplate-->
+<ng-template #townAddressTemplate>
+  <form [formGroup]="addressTownForm" novalidate>
+      <mat-form-field appearance="outline">
+        <mat-label>Town Name</mat-label>
+        <input matInput formControlName="townName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Suburb</mat-label>
+        <input matInput formControlName="suburb">
+      </mat-form-field>
+  </form>
+</ng-template>

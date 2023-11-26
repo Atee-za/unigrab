@@ -1,0 +1,54 @@
+<nav [ngClass]="{'expanded': showSearch}" class="navbar sticky-top navbar-expand-sm bg-light">
+  <div class="container justify-content-center">
+    <a class="navbar-brand" href="/home">UniGrab</a>
+  </div>
+
+  <div class="container">
+      <ul class="nav justify-content-between">
+        <div class="nav-item" routerLinkActive="active-link">
+          <a routerLink="/about">
+            <span>
+              <li>ABOUT</li>
+            </span>
+          </a>
+        </div>
+
+        <div class="nav-item" *ngIf="isAuthenticated" routerLinkActive="active-link">
+          <a routerLink="/profile">
+            <span>
+              <li>PROFILE</li>
+            </span>
+          </a>
+        </div>
+
+        <div class="nav-item" *ngIf="!isAuthenticated" routerLinkActive="active-link">
+          <a routerLink="/login">
+            <span>
+              <li>SIGN IN</li>
+            </span>
+          </a>
+        </div>
+
+        <div class="nav-item" *ngIf="isAuthenticated" routerLinkActive="active-link">
+          <a (click)="logout()" routerLink="/home">
+            <span>
+              <li>SIGN OUT</li>
+            </span>
+          </a>
+        </div>
+
+        <div *ngIf="currentRouteIsHome()">
+          <a (click)="toggleSearch()">
+            <span>
+               <img src="../assets/icons/search.svg">
+            </span>
+          </a>
+        </div>
+      </ul>
+
+  </div>
+
+</nav>
+<div *ngIf="showSearch && currentRouteIsHome()" class="search container-fluid">
+  <app-search></app-search>
+</div>

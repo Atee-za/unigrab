@@ -1,0 +1,1 @@
+ENV_FILE=./.env.tst docker-compose up -d --build

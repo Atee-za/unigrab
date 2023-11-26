@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>{{ heading }} item {{ item.type }}</h2>
+<div>
+  <mat-dialog-content class="mat-typography">
+
+    <form [formGroup]="itemForm" novalidate>
+      <div>
+        <div>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Samsung" formControlName="name" [readonly]="hideUpdate">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option value="book">Book</mat-option>
+                <mat-option value="camera">Camera</mat-option>
+                <mat-option value="laptop">Laptop</mat-option>
+                <mat-option value="phone">Phone</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Price</mat-label>
+              <input type="number" min="10" matInput formControlName="price" [readonly]="hideUpdate">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="description" [readonly]="hideUpdate"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div>
+          <div class="images" *ngFor="let image of item.images">
+            <img [src]="getImage(image.url)" alt="image missing">
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>{{ exitButton }}</button>
+    <button mat-button
+            [hidden]="hideUpdate"
+            [disabled]="!isValidNewItem()"
+            [mat-dialog-close]="true"
+            (click)="update()"
+            cdkFocusInitial>Update</button>
+  </mat-dialog-actions>
+</div>
+

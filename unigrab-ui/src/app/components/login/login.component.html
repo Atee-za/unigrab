@@ -1,0 +1,110 @@
+<!--Main View-->
+<div *ngIf="viewLoginTemplate; then loginTemplate else registerTemplate"></div>
+
+<!--loginTemplate-->
+<ng-template #loginTemplate>
+  <div class="container-fluid formParent">
+    <form [formGroup]="loginForm" novalidate>
+      <!--<h1>Login</h1>-->
+      <div class="loginForm inputFields">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" name="email" formControlName="email">
+          <mat-error *ngIf="!isValidLogin()">required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" formControlName="password">
+          <mat-error *ngIf="!isValidLogin()">required</mat-error>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword" type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <button [disabled]="!isValidLogin() || loading"
+              [class.spinner]="loading"
+              (click)="signIn()"
+              mat-stroked-button>
+        Sign in
+      </button>
+
+      <hr>
+      <a class="link">reset password</a> |
+      <a class="link" (click)="formsToggle()">register</a>
+      <br>
+    </form>
+  </div>
+</ng-template>
+
+<!--registerTemplate-->
+<ng-template #registerTemplate>
+  <div class="container-fluid formParent">
+    <form [formGroup]="registerForm">
+      <!--<h2>Register</h2>-->
+      <div class="registerForm inputFields">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput name="email" formControlName="email">
+          <mat-error *ngIf="!isValidRegister()">required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" formControlName="password">
+          <mat-error *ngIf="!isValidRegister()">required</mat-error>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword" type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" name="confirmPassword" formControlName="confirmPassword">
+          <mat-error *ngIf="!isValidRegister()">required</mat-error>
+          <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword" type="button">
+            <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div class="isStudent">
+        <h6>Are you a student?</h6>
+        <div class="row">
+          <div class="col form-check">
+            <input class="form-check-input" id="radioYes" type="radio" name="isStudent" value="true" checked formControlName="isStudent">
+            <label class="form-check-label" for="radioYes">
+              Yes
+            </label>
+          </div>
+
+          <div class="col form-check">
+            <input class="form-check-input" id="radioNo" type="radio" name="isStudent" value="false" formControlName="isStudent">
+            <label class="form-check-label" for="radioNo">
+              No
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label class="form-check-label">
+          <input type="checkbox" required="required" formControlName="accepted">
+          I accept the <a class="link" href="#">Terms of Use</a> &amp; <a class="link" href="#">Privacy Policy</a>
+        </label>
+      </div>
+
+      <button mat-stroked-button
+              [disabled]="!isValidRegister() || loading"
+              [class.spinner]="loading"
+              (click)="register()">
+        Register
+      </button>
+
+      <hr>
+      <a class="link" (click)="formsToggle()">sign in</a>
+    </form>
+  </div>
+</ng-template>
+

@@ -1,0 +1,16 @@
+@use "@angular/material" as mat;
+@include mat.core;
+
+$unigrab-primary: mat.define-palette(mat.$deep-orange-palette, A100, A700, 500);
+$unigrab-accent: mat.define-palette(mat.$yellow-palette, 50, A100, A400);
+$unigrab-warn: mat.define-palette(mat.$red-palette, 600, 400, A200);
+
+$unigrab-theme: mat.define-light-theme((
+  color: (
+    primary: $unigrab-primary,
+    accent: $unigrab-accent,
+    warn: $unigrab-warn,
+  ),
+));
+
+@include mat.all-component-themes($unigrab-theme);

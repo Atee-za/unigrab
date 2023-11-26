@@ -1,0 +1,96 @@
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.5; }
+  100% { transform: scale(0.8); opacity: 1; }
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2rem;
+  height: 2rem;
+  margin-top: -1rem;
+  margin-left: -1rem;
+  border-radius: 50%;
+  background-color: #ff9f1a;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.formParent{
+  justify-content: center;
+  width: 50%;
+  min-width: 200px;
+}
+
+.loginForm {
+  text-align:center;
+  background-color: #ffffff;
+  width: auto;
+  margin-top: 5rem;
+}
+
+.registerForm {
+  text-align:center;
+  background-color: #ffffff;
+  width: auto;
+  margin-top: 5rem;
+}
+
+span{
+  display: inline;
+}
+
+mat-form-field{
+  width: 50%;
+  min-width: 200px;
+}
+
+.inputFields {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.link {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #ad1414;
+}
+
+.form-control {
+  height: 40px;
+  box-shadow: none;
+  color: #969fa4;
+}
+
+
+.signup-form {
+  text-align:center;
+  background-color: #ffffff;
+  width: auto;
+  margin-top: 6rem;
+}
+
+.isStudent {
+  text-align:center;
+  display: flex;
+  justify-content: center;
+}
+
+mat-error {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 5px;
+}
+
+div h6 {
+  margin-right: 2rem;
+}

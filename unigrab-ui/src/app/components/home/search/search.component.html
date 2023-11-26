@@ -1,0 +1,36 @@
+<div class="search-form-container">
+  <!--Checkbox Row-->
+  <div class="checkbox-row">
+    <mat-checkbox *ngFor="let type of itemTypes"
+                  (change)="addItemType($event, type)"
+                  value="{{type}}">
+      {{ type }}
+    </mat-checkbox>
+  </div>
+
+  <!--Input Fields Row-->
+  <form [formGroup]="searchData" class="search-form">
+    <div class="input-fields">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Max Price</mat-label>
+        <input type="number" matInput formControlName="price">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Location</mat-label>
+        <input matInput formControlName="location">
+      </mat-form-field>
+    </div>
+  </form>
+
+  <!--Buttons Row-->
+  <div class="buttons">
+    <button mat-stroked-button class="clear-button" (click)="clear()">Clear</button>
+    <button mat-raised-button class="search-button" (click)="search()">Search</button>
+  </div>
+</div>

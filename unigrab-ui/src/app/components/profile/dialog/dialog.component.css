@@ -1,0 +1,18 @@
+
+.images {
+  display: inline-flex;
+}
+
+.images img {
+  width: 100px;
+  height: 100px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.images img:hover {
+  filter: brightness(70%);
+}

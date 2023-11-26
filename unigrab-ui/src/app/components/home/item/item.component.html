@@ -1,0 +1,47 @@
+<!--Loading Page-->
+<div *ngIf="isLoading; then loadingTemplate else mainTemplate"></div>
+
+<!--loadingTemplate-->
+<ng-template #loadingTemplate>
+  <div [class.spinner]="isLoading"></div>
+</ng-template>
+
+<!--Main View-->
+<ng-template #mainTemplate>
+  <div class="home">
+    <div class="row container-fluid">
+      <div class="col">
+        <div *ngIf="item; then itemTemplate else noItemTemplate"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!--itemTemplate-->
+<ng-template #itemTemplate>
+  <div class="container-fluid">
+    <div class="item-details">
+      <p class="item-name">{{item.name}} of R{{item.price}}</p>
+      <p>Available at {{item.town}}, {{item.suburb}}</p>
+      <p><i>"{{item.description}}"</i></p>
+    </div>
+    <div class="item-images">
+      <img *ngFor="let image of item.images"
+           mat-card-image loading="lazy"
+           [src]="getImage(image.url)">
+    </div>
+  </div>
+  <div class="container-fluid">
+    <button mat-flat-button>report item</button>
+  </div>
+</ng-template>
+
+<ng-template #noItemTemplate>
+  <div class="container-fluid no-item-container">
+    <div class="no-item-content">
+      <p>Item not found.</p>
+      <h6>Check if the search criteria is correct.</h6>
+    </div>
+  </div>
+</ng-template>
+

@@ -1,0 +1,46 @@
+
+####### UNDER DEVELOPMENT #######
+Heavy weight
+    - Add Info in About page
+    - Add Info in Item page
+    - Add option to mark Items as 'SOLD'
+    - Select website theme
+    - Make sure all UI components are 100%
+    - Make sure UI on mobile is 100%
+    - Email send and receive
+    - Add Info in Item page and all necessary functionality
+    - Add backend unit tests
+    - Create website domain name from (Google, GoDaddy...)
+    - Setup pipeline from GitLab to build, test, deploy to aws ec2
+
+Light weight
+    - Add table create migration script of all existing tables...create table if not exist
+    - Fix error handling issues e.g. when receiving 403 we should log out in some cases NOT always
+    - Fix mouse cursor that affects global styling by appearing everywhere
+    - Remove horizontal scrollbar in Profile when in small screen
+    - Fix bug when selected an image(s) to upload in profile then move to a different page within profile
+    - Make price a whole number integer
+
+########################################################
+
+    note to self
+    - ask for help if need be.
+
+
+
+############# COMPLETED ####################
+
+   FRONTEND
+    - Frontend must cache images
+    - When Updating Address, also update all available user item's address
+    - Fix pagination bug (offset not correct when searching)
+    - Fix profile spinner bug (all buttons with spinner spins when clicked on one)
+    - Fix UI for Sign In/Register page
+    - Try to clean Item in Home page. Try removing unnecessary fields e.g. description
+
+   BACKEND
+    - Upload images to a bucket
+    - Create AWS account
+    - Add 'Authorize' button in Swagger-ui
+
+####################################################

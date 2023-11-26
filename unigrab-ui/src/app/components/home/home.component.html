@@ -1,0 +1,53 @@
+<!--Loading Page-->
+<div *ngIf="loading; then loadingTemplate else mainTemplate"></div>
+
+<!--Main View-->
+<ng-template #mainTemplate>
+  <div class="home">
+    <div class="row container-fluid">
+      <div class="col">
+        <div *ngIf="items.length > 0; then itemsTemplate else noItemsTemplate"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!--loadingTemplate-->
+<ng-template #loadingTemplate>
+  <div [class.spinner]="loading"></div>
+</ng-template>
+
+<!--noItemsTemplate-->
+<ng-template #noItemsTemplate>
+  <div class="container-fluid no-item-container">
+    <div class="no-item-content">
+      <p>There are no items found.</p>
+      <h6>Search criteria may be overly specific or Unigrab is currently experiencing service interruptions.</h6>
+    </div>
+  </div>
+</ng-template>
+
+<!--itemsTemplate-->
+<ng-template #itemsTemplate>
+  <mat-card *ngFor="let item of items" (click)="viewItem(item)">
+    <img mat-card-image loading="lazy"
+         [src]="getImage(item.images[0].url)">
+    <mat-card-content class="container-fluid">
+      <p class="price">R {{ item.price }}</p>
+      <p class="location">Available at: {{ item.town }}</p>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<!--paginator-->
+<footer>
+  <div class="paginator" *ngIf="items.length > 0 && !loading;">
+    <mat-paginator [length]="pageItems.totalElements"
+                   [pageSize]="pageItems.pageSize"
+                   [pageIndex]="pageItems.currentPage"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="onPaginateChange($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </div>
+</footer>

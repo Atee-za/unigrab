@@ -1,0 +1,7 @@
+.*
+*.iml
+gradle
+build/*
+unigrab-ui/
+# except files for docker
+!build/docker
