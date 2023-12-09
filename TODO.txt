@@ -16,7 +16,6 @@ Heavy weight
 Light weight
     - Add table create migration script of all existing tables...create table if not exist
     - Fix error handling issues e.g. when receiving 403 we should log out in some cases NOT always
-    - Fix mouse cursor that affects global styling by appearing everywhere
     - Remove horizontal scrollbar in Profile when in small screen
     - Fix bug when selected an image(s) to upload in profile then move to a different page within profile
     - Make price a whole number integer
