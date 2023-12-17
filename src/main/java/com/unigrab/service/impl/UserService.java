@@ -176,7 +176,7 @@ public class UserService implements IUserService {
             this.update(user);
         }
 
-        log.trace("Updated Password: {} for: {}", dto, user.getUserId());
+        log.info("Updated Password: {} for: {}", dto, user.getUserId());
         return isValidPassword;
     }
 
@@ -194,6 +194,13 @@ public class UserService implements IUserService {
             isUnique = userRepository.existsByUserId(uniqueId);
         } while (isUnique);
         return uniqueId.replace("-", "");
+    }
+
+    @Override
+    public Token refreshToken() {
+        EndUser user = checkCurrentUser();
+        log.info("Refreshing token for user: {}", user.getUserId());
+        return new Token(jwtService.generateToken(user));
     }
 
     private EndUser checkCurrentUser() {

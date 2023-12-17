@@ -45,7 +45,6 @@ public class AuthService implements IAuthService {
                 .build();
 
         userService.save(user);
-
         return new Token(jwtService.generateToken(user));
     }
 
@@ -60,9 +59,7 @@ public class AuthService implements IAuthService {
         }
 
         var user = userService.findByEmail(dto.getEmail());
-        var jwtToken = jwtService.generateToken(user);
-
-        return new Token(jwtToken);
+        return new Token(jwtService.generateToken(user));
     }
 
 }

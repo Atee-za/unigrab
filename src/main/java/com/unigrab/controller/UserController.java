@@ -1,9 +1,6 @@
 package com.unigrab.controller;
 
-import com.unigrab.model.dto.CampusDto;
-import com.unigrab.model.dto.PasswordUpdate;
-import com.unigrab.model.dto.TownDto;
-import com.unigrab.model.dto.UserInfoDto;
+import com.unigrab.model.dto.*;
 import com.unigrab.service.IUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +36,11 @@ public class UserController {
     public boolean updatePassword(@Valid @RequestBody PasswordUpdate dto){
         log.info("Updating Password");
         return userService.updatePassword(dto);
+    }
+
+    @GetMapping("/refresh")
+    public Token refreshToken() {
+        return userService.refreshToken();
     }
 
 }

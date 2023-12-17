@@ -1,9 +1,6 @@
 package com.unigrab.service;
 
-import com.unigrab.model.dto.CampusDto;
-import com.unigrab.model.dto.PasswordUpdate;
-import com.unigrab.model.dto.TownDto;
-import com.unigrab.model.dto.UserInfoDto;
+import com.unigrab.model.dto.*;
 import com.unigrab.model.entity.EndUser;
 
 public interface IUserService extends IService<EndUser, Long> {
@@ -14,4 +11,5 @@ public interface IUserService extends IService<EndUser, Long> {
     boolean updatePassword(PasswordUpdate dto);
     boolean existsByEmail(String email);
     String getUniqueUserId();
+    Token refreshToken();
 }

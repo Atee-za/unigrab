@@ -1,0 +1,7 @@
+node_modules
+dist
+*.log
+.angular
+.vscode
+# except files for docker
+!build/docker

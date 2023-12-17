@@ -3,7 +3,6 @@ import {Router} from "@angular/router";
 import {Item} from "../../model/item";
 import {ItemService} from "../../service/item.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {SnackbarService} from "../../service/snackbar.service";
 import {SharedService} from "../../service/shared.service";
 import {AuthService} from "../../service/authentication/auth.service";
 import {PageEvent} from "@angular/material/paginator";
@@ -26,12 +25,11 @@ export class HomeComponent extends Unsubscribe implements OnInit {
   loading: boolean = false;
 
   offset: number = 0;
-  pageSize: number = 10;
+  pageSize: number = this.sharedService.getPageSize();
   pageSizeOptions = [3, 5, 10, 20, 30];
 
   constructor(private router: Router,
               private itemService: ItemService,
-              private snackbar: SnackbarService,
               private authService: AuthService,
               private sharedService: SharedService) {
     super();
@@ -60,6 +58,7 @@ export class HomeComponent extends Unsubscribe implements OnInit {
   onPaginateChange(event: PageEvent){
     this.offset = event.pageIndex;
     this.pageSize = event.pageSize;
+    this.sharedService.setPageSize(this.pageSize);
     this.loadItems();
   }
 

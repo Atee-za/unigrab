@@ -11,6 +11,8 @@ import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -32,6 +34,8 @@ public class AuthController {
     @PostMapping("/authenticate")
     public Token authenticate(@RequestBody SignInDto dto) {
         log.info("About to signIn user: {}", dto.getEmail());
+        System.err.println(new Date(System.currentTimeMillis()));
+        System.err.println(new Date(System.currentTimeMillis() + 1000 * 60 * 24));
         return authService.signIn(dto);
     }
 

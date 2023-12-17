@@ -21,22 +21,6 @@
           </a>
         </div>
 
-        <div class="nav-item" *ngIf="!isAuthenticated" routerLinkActive="active-link">
-          <a routerLink="/login">
-            <span>
-              <li>SIGN IN</li>
-            </span>
-          </a>
-        </div>
-
-        <div class="nav-item" *ngIf="isAuthenticated" routerLinkActive="active-link">
-          <a (click)="logout()" routerLink="/home">
-            <span>
-              <li>SIGN OUT</li>
-            </span>
-          </a>
-        </div>
-
         <div *ngIf="currentRouteIsHome()">
           <a (click)="toggleSearch()">
             <span>
@@ -45,6 +29,18 @@
           </a>
         </div>
       </ul>
+
+    <div class="sign-in" *ngIf="!isAuthenticated">
+      <a routerLink="/login">
+        Sign in
+      </a>
+    </div>
+
+    <div class="sign-out" *ngIf="isAuthenticated">
+      <a (click)="logout()" routerLink="/home">
+        Sign out
+      </a>
+    </div>
 
   </div>
 

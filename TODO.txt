@@ -8,7 +8,6 @@ Heavy weight
     - Make sure all UI components are 100%
     - Make sure UI on mobile is 100%
     - Email send and receive
-    - Add Info in Item page and all necessary functionality
     - Add backend unit tests
     - Create website domain name from (Google, GoDaddy...)
     - Setup pipeline from GitLab to build, test, deploy to aws ec2
@@ -36,10 +35,12 @@ Light weight
     - Fix profile spinner bug (all buttons with spinner spins when clicked on one)
     - Fix UI for Sign In/Register page
     - Try to clean Item in Home page. Try removing unnecessary fields e.g. description
+    - Add refresh token logic
 
    BACKEND
     - Upload images to a bucket
     - Create AWS account
     - Add 'Authorize' button in Swagger-ui
+    - Add refresh token logic
 
 ####################################################

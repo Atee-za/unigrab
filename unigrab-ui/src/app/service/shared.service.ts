@@ -6,6 +6,7 @@ import {AuthService} from "./authentication/auth.service";
 import {Router} from "@angular/router";
 import {SearchData} from "../model/searchData";
 import {Subject} from "rxjs";
+import {Constants} from "../model/constants";
 
 @Injectable({ providedIn: 'root' })
 export class SharedService {
@@ -29,6 +30,15 @@ export class SharedService {
 
   updateSearchParams(param: SearchData) {
     this.searchParams.next(param);
+  }
+
+  setPageSize(index: number): void {
+    sessionStorage.setItem(Constants.PAGE_SIZE, index.toString());
+  }
+
+  getPageSize() {
+    let pageSize = sessionStorage.getItem(Constants.PAGE_SIZE);
+    return pageSize ? parseInt(pageSize) : Constants.DEFAULT_PAGE_SIZE;
   }
 
   handleError(error: HttpErrorResponse){
